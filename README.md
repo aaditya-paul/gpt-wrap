@@ -35,12 +35,14 @@ Like Spotify Wrapped, but for your AI conversations. GPT Wrapped transforms your
 ### Installation
 
 1. **Clone the repository**
+
    ```bash
    git clone https://github.com/aaditya-paul/gpt-wrap.git
    cd gpt-wrap
    ```
 
 2. **Install dependencies**
+
    ```bash
    npm install
    # or
@@ -50,6 +52,7 @@ Like Spotify Wrapped, but for your AI conversations. GPT Wrapped transforms your
    ```
 
 3. **Run the development server**
+
    ```bash
    npm run dev
    # or
@@ -91,20 +94,24 @@ Like Spotify Wrapped, but for your AI conversations. GPT Wrapped transforms your
 ## 🛠️ Tech Stack
 
 ### Core
+
 - **[Next.js 16](https://nextjs.org/)** - React framework with App Router
 - **[React 19](https://react.dev/)** - UI library with latest features
 - **[TypeScript](https://www.typescriptlang.org/)** - Type safety
 
 ### Styling & Animation
+
 - **[Tailwind CSS 4](https://tailwindcss.com/)** - Utility-first CSS
 - **[Framer Motion](https://www.framer.com/motion/)** - Smooth animations
 
 ### Data & Charts
+
 - **[Recharts](https://recharts.org/)** - Beautiful data visualizations
 - **[date-fns](https://date-fns.org/)** - Date manipulation
 - **[idb-keyval](https://github.com/jakearchibald/idb-keyval)** - IndexedDB wrapper
 
 ### Export & Share
+
 - **[html-to-image](https://github.com/bubkoo/html-to-image)** - Export stats as images
 - **[lucide-react](https://lucide.dev/)** - Beautiful icons
 - **[react-countup](https://github.com/glennreyes/react-countup)** - Animated counters
