@@ -300,7 +300,7 @@ export function AIInsightsChat({
                     <AlertCircle className="w-12 h-12 text-red-400" />
                     <p className="text-red-300">{error}</p>
                     <button
-                      onClick={analyzeConversation}
+                      onClick={() => analyzeConversation()}
                       className="px-4 py-2 bg-red-500/20 text-red-300 rounded-lg hover:bg-red-500/30 transition-colors"
                     >
                       Try Again
