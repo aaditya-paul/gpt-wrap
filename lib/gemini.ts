@@ -94,7 +94,7 @@ export async function generateConversationSummary(
   messages: ChatMessage[],
   title: string
 ): Promise<string> {
-  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+  const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash-lite" });
 
   // For long conversations, use chunking and summarization
   const chunks = chunkConversation(messages);
@@ -153,7 +153,7 @@ export async function analyzeUserPatterns(
   messages: ChatMessage[],
   title: string
 ): Promise<string> {
-  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+  const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash-lite" });
 
   // Extract only user messages for analysis
   const userMessages = messages.filter((m) => m.role === "user");
@@ -189,7 +189,7 @@ export async function chatAboutConversation(
   userMessage: string,
   cachedSummary?: string
 ): Promise<string> {
-  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+  const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash-lite" });
 
   // Create context summary if not provided
   let contextSummary = cachedSummary;
@@ -249,7 +249,7 @@ export async function generateInitialInsights(
   conversationStyle: string;
   suggestedQuestions: string[];
 }> {
-  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+  const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash-lite" });
 
   const userMessages = messages.filter((m) => m.role === "user");
   const condensedConversation = condenseMessages(messages, 30000);

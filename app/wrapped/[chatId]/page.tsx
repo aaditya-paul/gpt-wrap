@@ -114,7 +114,7 @@ export default function ChatDetailPage() {
         </motion.div>
 
         {/* AI Features */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8 items-start min-h-24">
           <AISummary
             messages={conversation.messages.map((m) => ({
               role: m.role,

@@ -55,18 +55,42 @@ export function AIInsightsChat({
     scrollToBottom();
   }, [messages]);
 
-  const analyzeConversation = async () => {
+  const analyzeConversation = async (retryCount = 0) => {
     if (insights) return;
 
     setIsAnalyzing(true);
     setError(null);
 
+    const maxRetries = 3;
+    const baseDelay = 2000; // 2 seconds
+
     try {
+      // Add a small delay to avoid hitting rate limits
+      if (retryCount > 0) {
+        const delay = baseDelay * Math.pow(2, retryCount - 1);
+        await new Promise((resolve) => setTimeout(resolve, delay));
+      }
+
       const response = await fetch("/api/analyze", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ messages: conversationMessages, title }),
       });
+
+      // Handle rate limiting with retry
+      if (response.status === 429 && retryCount < maxRetries) {
+        setError(
+          `Rate limited. Retrying in ${
+            (baseDelay * Math.pow(2, retryCount)) / 1000
+          }s...`
+        );
+        setIsAnalyzing(false);
+        setTimeout(
+          () => analyzeConversation(retryCount + 1),
+          baseDelay * Math.pow(2, retryCount)
+        );
+        return;
+      }
 
       const data = await response.json();
 
@@ -113,45 +137,67 @@ export function AIInsightsChat({
     setIsLoading(true);
     setError(null);
 
+    const sendWithRetry = async (retryCount = 0): Promise<void> => {
+      const maxRetries = 3;
+      const baseDelay = 2000;
+
+      try {
+        if (retryCount > 0) {
+          await new Promise((resolve) =>
+            setTimeout(resolve, baseDelay * Math.pow(2, retryCount - 1))
+          );
+        }
+
+        // Build chat history for API (exclude the intro message for cleaner context)
+        const chatHistory = messages
+          .filter((m) => m.id !== "intro")
+          .map((m) => ({
+            role: m.role === "user" ? "user" : "model",
+            parts: [{ text: m.content }],
+          }));
+
+        const response = await fetch("/api/chat", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            messages: conversationMessages,
+            title,
+            chatHistory,
+            userMessage: text,
+            cachedContext,
+          }),
+        });
+
+        if (response.status === 429 && retryCount < maxRetries) {
+          await sendWithRetry(retryCount + 1);
+          return;
+        }
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.error || "Failed to send message");
+        }
+
+        // Cache context for future messages
+        if (data.context) {
+          setCachedContext(data.context);
+        }
+
+        const assistantMessage: Message = {
+          id: (Date.now() + 1).toString(),
+          role: "assistant",
+          content: data.response,
+        };
+
+        setMessages((prev) => [...prev, assistantMessage]);
+      } catch (err) {
+        throw err;
+      }
+    };
+
     try {
-      // Build chat history for API (exclude the intro message for cleaner context)
-      const chatHistory = messages
-        .filter((m) => m.id !== "intro")
-        .map((m) => ({
-          role: m.role === "user" ? "user" : "model",
-          parts: [{ text: m.content }],
-        }));
-
-      const response = await fetch("/api/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          messages: conversationMessages,
-          title,
-          chatHistory,
-          userMessage: text,
-          cachedContext,
-        }),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || "Failed to send message");
-      }
-
-      // Cache context for future messages
-      if (data.context) {
-        setCachedContext(data.context);
-      }
-
-      const assistantMessage: Message = {
-        id: (Date.now() + 1).toString(),
-        role: "assistant",
-        content: data.response,
-      };
-
-      setMessages((prev) => [...prev, assistantMessage]);
+      await sendWithRetry();
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong");
     } finally {
@@ -173,7 +219,7 @@ export function AIInsightsChat({
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
         onClick={handleOpen}
-        className="w-full glass rounded-2xl p-4 flex items-center gap-4 hover:bg-white/5 transition-colors group"
+        className="w-full glass rounded-2xl p-4 flex items-start gap-4 hover:bg-white/5 transition-colors group h-full"
       >
         <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-500 flex items-center justify-center">
           <Brain className="w-6 h-6 text-white" />
