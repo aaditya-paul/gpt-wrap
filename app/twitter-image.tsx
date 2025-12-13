@@ -20,8 +20,7 @@ export default async function TwitterImage() {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          background:
-            "linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #0a0a0a 100%)",
+          backgroundColor: "#0a0a0a",
           position: "relative",
         }}
       >
@@ -29,25 +28,23 @@ export default async function TwitterImage() {
         <div
           style={{
             position: "absolute",
-            top: "-100px",
-            left: "-100px",
-            width: "400px",
-            height: "400px",
-            background:
-              "radial-gradient(circle, rgba(168, 85, 247, 0.3) 0%, transparent 70%)",
-            borderRadius: "50%",
+            top: -100,
+            left: -100,
+            width: 400,
+            height: 400,
+            backgroundColor: "rgba(168, 85, 247, 0.2)",
+            borderRadius: 200,
           }}
         />
         <div
           style={{
             position: "absolute",
-            bottom: "-100px",
-            right: "-100px",
-            width: "400px",
-            height: "400px",
-            background:
-              "radial-gradient(circle, rgba(236, 72, 153, 0.3) 0%, transparent 70%)",
-            borderRadius: "50%",
+            bottom: -100,
+            right: -100,
+            width: 400,
+            height: 400,
+            backgroundColor: "rgba(236, 72, 153, 0.2)",
+            borderRadius: 200,
           }}
         />
 
@@ -57,26 +54,21 @@ export default async function TwitterImage() {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            width: "100px",
-            height: "100px",
-            background: "linear-gradient(135deg, #a855f7 0%, #ec4899 100%)",
-            borderRadius: "24px",
-            marginBottom: "28px",
-            boxShadow: "0 25px 50px -12px rgba(168, 85, 247, 0.5)",
+            width: 100,
+            height: 100,
+            backgroundColor: "#a855f7",
+            borderRadius: 24,
+            marginBottom: 28,
           }}
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="56"
-            height="56"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="white"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" />
+          <svg width="56" height="56" viewBox="0 0 24 24" fill="none">
+            <path
+              d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"
+              stroke="white"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
           </svg>
         </div>
 
@@ -84,11 +76,10 @@ export default async function TwitterImage() {
         <div
           style={{
             display: "flex",
-            fontSize: "64px",
+            fontSize: 64,
             fontWeight: 900,
             color: "#a855f7",
-            marginBottom: "12px",
-            letterSpacing: "-2px",
+            marginBottom: 12,
           }}
         >
           GPT Wrapped
@@ -97,7 +88,7 @@ export default async function TwitterImage() {
         {/* Subtitle */}
         <div
           style={{
-            fontSize: "24px",
+            fontSize: 24,
             color: "#9ca3af",
             textAlign: "center",
           }}

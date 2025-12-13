@@ -20,8 +20,7 @@ export default async function OGImage() {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          background:
-            "linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #0a0a0a 100%)",
+          backgroundColor: "#0a0a0a",
           position: "relative",
         }}
       >
@@ -29,25 +28,23 @@ export default async function OGImage() {
         <div
           style={{
             position: "absolute",
-            top: "-100px",
-            left: "-100px",
-            width: "400px",
-            height: "400px",
-            background:
-              "radial-gradient(circle, rgba(168, 85, 247, 0.3) 0%, transparent 70%)",
-            borderRadius: "50%",
+            top: -100,
+            left: -100,
+            width: 400,
+            height: 400,
+            backgroundColor: "rgba(168, 85, 247, 0.15)",
+            borderRadius: 200,
           }}
         />
         <div
           style={{
             position: "absolute",
-            bottom: "-100px",
-            right: "-100px",
-            width: "400px",
-            height: "400px",
-            background:
-              "radial-gradient(circle, rgba(236, 72, 153, 0.3) 0%, transparent 70%)",
-            borderRadius: "50%",
+            bottom: -100,
+            right: -100,
+            width: 400,
+            height: 400,
+            backgroundColor: "rgba(236, 72, 153, 0.15)",
+            borderRadius: 200,
           }}
         />
 
@@ -57,26 +54,21 @@ export default async function OGImage() {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            width: "120px",
-            height: "120px",
-            background: "linear-gradient(135deg, #a855f7 0%, #ec4899 100%)",
-            borderRadius: "28px",
-            marginBottom: "32px",
-            boxShadow: "0 25px 50px -12px rgba(168, 85, 247, 0.5)",
+            width: 120,
+            height: 120,
+            backgroundColor: "#a855f7",
+            borderRadius: 28,
+            marginBottom: 32,
           }}
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="64"
-            height="64"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="white"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" />
+          <svg width="64" height="64" viewBox="0 0 24 24" fill="none">
+            <path
+              d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"
+              stroke="white"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
           </svg>
         </div>
 
@@ -84,11 +76,10 @@ export default async function OGImage() {
         <div
           style={{
             display: "flex",
-            fontSize: "72px",
+            fontSize: 72,
             fontWeight: 900,
             color: "#a855f7",
-            marginBottom: "16px",
-            letterSpacing: "-2px",
+            marginBottom: 16,
           }}
         >
           GPT Wrapped
@@ -97,10 +88,9 @@ export default async function OGImage() {
         {/* Subtitle */}
         <div
           style={{
-            fontSize: "28px",
+            fontSize: 28,
             color: "#9ca3af",
             textAlign: "center",
-            maxWidth: "700px",
           }}
         >
           Your year with ChatGPT, beautifully visualized
@@ -110,29 +100,43 @@ export default async function OGImage() {
         <div
           style={{
             display: "flex",
-            gap: "16px",
-            marginTop: "48px",
+            gap: 16,
+            marginTop: 48,
           }}
         >
-          {[
-            "🎨 Wrapped Experience",
-            "📊 Deep Analytics",
-            "🔒 Privacy First",
-          ].map((feature) => (
-            <div
-              key={feature}
-              style={{
-                padding: "12px 24px",
-                background: "rgba(255, 255, 255, 0.1)",
-                borderRadius: "50px",
-                color: "#d1d5db",
-                fontSize: "18px",
-                border: "1px solid rgba(255, 255, 255, 0.1)",
-              }}
-            >
-              {feature}
-            </div>
-          ))}
+          <div
+            style={{
+              padding: "12px 24px",
+              backgroundColor: "rgba(255, 255, 255, 0.1)",
+              borderRadius: 50,
+              color: "#d1d5db",
+              fontSize: 18,
+            }}
+          >
+            🎨 Wrapped Experience
+          </div>
+          <div
+            style={{
+              padding: "12px 24px",
+              backgroundColor: "rgba(255, 255, 255, 0.1)",
+              borderRadius: 50,
+              color: "#d1d5db",
+              fontSize: 18,
+            }}
+          >
+            📊 Deep Analytics
+          </div>
+          <div
+            style={{
+              padding: "12px 24px",
+              backgroundColor: "rgba(255, 255, 255, 0.1)",
+              borderRadius: 50,
+              color: "#d1d5db",
+              fontSize: 18,
+            }}
+          >
+            🔒 Privacy First
+          </div>
         </div>
       </div>
     ),
