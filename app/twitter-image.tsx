@@ -86,9 +86,7 @@ export default async function TwitterImage() {
             display: "flex",
             fontSize: "64px",
             fontWeight: 900,
-            background: "linear-gradient(90deg, #a855f7, #ec4899, #f97316)",
-            backgroundClip: "text",
-            color: "transparent",
+            color: "#a855f7",
             marginBottom: "12px",
             letterSpacing: "-2px",
           }}
