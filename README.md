@@ -22,8 +22,9 @@ Like Spotify Wrapped, but for your AI conversations. GPT Wrapped transforms your
 - 📤 **Export & Share** - Download your stats as beautiful PNG/JPEG images
 - 🔍 **Single Chat Analysis** - Deep dive into individual conversations
 - 📚 **All Conversations** - Browse and search through your entire chat history
-- 🤖 **AI Summary** - Gemini-powered context summaries for each conversation
-- 🧠 **AI Insights Chat** - Chat with AI about your patterns, mental state, and thought process
+- 🤖 **AI Summary** - Gemini-powered concise context summaries for each conversation
+- 🧠 **AI Insights Chat** - Interactive chat analyzing your patterns, mental state, thought process & more
+- 🔄 **Smart Retry** - Automatic retry with exponential backoff for rate limits
 
 ---
 
@@ -54,7 +55,21 @@ Like Spotify Wrapped, but for your AI conversations. GPT Wrapped transforms your
    pnpm install
    ```
 
-3. **Run the development server**
+3. **Set up environment variables (for AI features)**
+
+   ```bash
+   cp .env.example .env.local
+   ```
+
+   Then add your Gemini API key:
+
+   ```env
+   GEMINI_API_KEY=your_gemini_api_key_here
+   ```
+
+   > Get your free API key at [Google AI Studio](https://aistudio.google.com/apikey)
+
+4. **Run the development server**
 
    ```bash
    npm run dev
@@ -64,7 +79,7 @@ Like Spotify Wrapped, but for your AI conversations. GPT Wrapped transforms your
    pnpm dev
    ```
 
-4. **Open your browser**
+5. **Open your browser**
    Navigate to [http://localhost:3000](http://localhost:3000)
 
 ---
@@ -113,6 +128,12 @@ Like Spotify Wrapped, but for your AI conversations. GPT Wrapped transforms your
 - **[date-fns](https://date-fns.org/)** - Date manipulation
 - **[idb-keyval](https://github.com/jakearchibald/idb-keyval)** - IndexedDB wrapper
 
+### AI Features
+
+- **[Google Generative AI](https://ai.google.dev/)** - Gemini 2.0 Flash for summaries & insights
+- **Smart Chunking** - Handles long conversations by splitting into manageable chunks
+- **Context Caching** - Efficient multi-turn conversations with cached context
+
 ### Export & Share
 
 - **[html-to-image](https://github.com/bubkoo/html-to-image)** - Export stats as images
@@ -139,13 +160,20 @@ gpt-wrap/
 │   ├── footer.tsx           # Footer with socials
 │   ├── FileUpload.tsx       # File upload component
 │   ├── ExportShare.tsx      # Export & share modal
+│   ├── AISummary.tsx        # AI-powered conversation summary
+│   ├── AIInsightsChat.tsx   # Interactive AI insights chat
 │   ├── charts/              # Chart components
 │   └── stats/               # Stat card components
+├── app/api/                 # API Routes
+│   ├── summarize/           # Generate AI summaries
+│   ├── analyze/             # Generate AI insights
+│   └── chat/                # Interactive AI chat
 ├── lib/                     # Core logic
 │   ├── types.ts             # TypeScript interfaces
 │   ├── parser.ts            # Conversation parser
 │   ├── analytics.ts         # Analytics engine
-│   └── storage.ts           # IndexedDB operations
+│   ├── storage.ts           # IndexedDB operations
+│   └── gemini.ts            # Gemini AI integration
 └── context/                 # React Context
     └── ConversationContext.tsx
 ```
