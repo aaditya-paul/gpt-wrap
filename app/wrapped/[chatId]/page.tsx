@@ -5,6 +5,8 @@ import { useParams, useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { useConversations } from "@/context/ConversationContext";
 import { Header } from "@/components/Header";
+import { AISummary } from "@/components/AISummary";
+import { AIInsightsChat } from "@/components/AIInsightsChat";
 import { getModelDisplayName } from "@/lib/analytics";
 import { format } from "date-fns";
 import {
@@ -110,6 +112,24 @@ export default function ChatDetailPage() {
             </p>
           </div>
         </motion.div>
+
+        {/* AI Features */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+          <AISummary
+            messages={conversation.messages.map((m) => ({
+              role: m.role,
+              content: m.content,
+            }))}
+            title={conversation.title}
+          />
+          <AIInsightsChat
+            conversationMessages={conversation.messages.map((m) => ({
+              role: m.role,
+              content: m.content,
+            }))}
+            title={conversation.title}
+          />
+        </div>
 
         {/* Breakdown */}
         <motion.div

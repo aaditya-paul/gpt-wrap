@@ -20,7 +20,8 @@ export default async function TwitterImage() {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          background: "linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #0a0a0a 100%)",
+          background:
+            "linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #0a0a0a 100%)",
           position: "relative",
         }}
       >
@@ -32,7 +33,8 @@ export default async function TwitterImage() {
             left: "-100px",
             width: "400px",
             height: "400px",
-            background: "radial-gradient(circle, rgba(168, 85, 247, 0.3) 0%, transparent 70%)",
+            background:
+              "radial-gradient(circle, rgba(168, 85, 247, 0.3) 0%, transparent 70%)",
             borderRadius: "50%",
           }}
         />
@@ -43,7 +45,8 @@ export default async function TwitterImage() {
             right: "-100px",
             width: "400px",
             height: "400px",
-            background: "radial-gradient(circle, rgba(236, 72, 153, 0.3) 0%, transparent 70%)",
+            background:
+              "radial-gradient(circle, rgba(236, 72, 153, 0.3) 0%, transparent 70%)",
             borderRadius: "50%",
           }}
         />

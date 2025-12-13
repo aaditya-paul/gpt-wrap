@@ -20,7 +20,8 @@ export default async function OGImage() {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          background: "linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #0a0a0a 100%)",
+          background:
+            "linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #0a0a0a 100%)",
           position: "relative",
         }}
       >
@@ -32,7 +33,8 @@ export default async function OGImage() {
             left: "-100px",
             width: "400px",
             height: "400px",
-            background: "radial-gradient(circle, rgba(168, 85, 247, 0.3) 0%, transparent 70%)",
+            background:
+              "radial-gradient(circle, rgba(168, 85, 247, 0.3) 0%, transparent 70%)",
             borderRadius: "50%",
           }}
         />
@@ -43,7 +45,8 @@ export default async function OGImage() {
             right: "-100px",
             width: "400px",
             height: "400px",
-            background: "radial-gradient(circle, rgba(236, 72, 153, 0.3) 0%, transparent 70%)",
+            background:
+              "radial-gradient(circle, rgba(236, 72, 153, 0.3) 0%, transparent 70%)",
             borderRadius: "50%",
           }}
         />
@@ -113,23 +116,25 @@ export default async function OGImage() {
             marginTop: "48px",
           }}
         >
-          {["🎨 Wrapped Experience", "📊 Deep Analytics", "🔒 Privacy First"].map(
-            (feature) => (
-              <div
-                key={feature}
-                style={{
-                  padding: "12px 24px",
-                  background: "rgba(255, 255, 255, 0.1)",
-                  borderRadius: "50px",
-                  color: "#d1d5db",
-                  fontSize: "18px",
-                  border: "1px solid rgba(255, 255, 255, 0.1)",
-                }}
-              >
-                {feature}
-              </div>
-            )
-          )}
+          {[
+            "🎨 Wrapped Experience",
+            "📊 Deep Analytics",
+            "🔒 Privacy First",
+          ].map((feature) => (
+            <div
+              key={feature}
+              style={{
+                padding: "12px 24px",
+                background: "rgba(255, 255, 255, 0.1)",
+                borderRadius: "50px",
+                color: "#d1d5db",
+                fontSize: "18px",
+                border: "1px solid rgba(255, 255, 255, 0.1)",
+              }}
+            >
+              {feature}
+            </div>
+          ))}
         </div>
       </div>
     ),

@@ -22,6 +22,8 @@ Like Spotify Wrapped, but for your AI conversations. GPT Wrapped transforms your
 - 📤 **Export & Share** - Download your stats as beautiful PNG/JPEG images
 - 🔍 **Single Chat Analysis** - Deep dive into individual conversations
 - 📚 **All Conversations** - Browse and search through your entire chat history
+- 🤖 **AI Summary** - Gemini-powered context summaries for each conversation
+- 🧠 **AI Insights Chat** - Chat with AI about your patterns, mental state, and thought process
 
 ---
 
@@ -31,6 +33,7 @@ Like Spotify Wrapped, but for your AI conversations. GPT Wrapped transforms your
 
 - Node.js 18+ and npm/yarn/pnpm
 - Your ChatGPT conversation export (`conversations.json`)
+- (Optional) Gemini API key for AI features
 
 ### Installation
 
