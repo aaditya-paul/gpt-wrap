@@ -155,7 +155,7 @@ export default function AboutPage() {
               GPT Wrapped is free and open source. Contributions are welcome!
             </p>
             <a
-              href="https://github.com/gpt-wrap"
+              href="https://github.com/aaditya-paul/gpt-wrap"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-6 py-3 bg-white/10 text-white rounded-xl hover:bg-white/20 transition-colors"
