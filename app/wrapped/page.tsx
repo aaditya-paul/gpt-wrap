@@ -318,33 +318,35 @@ export default function WrappedPage() {
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="text-xl text-white/70 mb-4"
+              className="text-xl text-white mb-8"
             >
               Your peak chatting hour was...
             </motion.p>
-            <BigStat
-              label=""
-              value={analytics.peakHour}
-              suffix={analytics.peakHour >= 12 ? " PM" : " AM"}
-              prefix={analytics.peakHour > 12 ? "" : ""}
-              delay={0.2}
-              gradient="from-amber-400 to-orange-500"
-            />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.3 }}
+              className="text-center mb-4"
+            >
+              <span className="text-7xl md:text-9xl font-black text-white drop-shadow-lg">
+                {formatHour(analytics.peakHour)}
+              </span>
+            </motion.div>
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.5 }}
-              className="mt-8 text-center text-white/50"
+              className="text-center text-white/80 text-lg"
             >
-              <p>{formatHour(analytics.peakHour)} was your most active time</p>
+              <p>Your most active time of day</p>
             </motion.div>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.7 }}
-              className="mt-8 w-full max-w-2xl glass rounded-2xl p-6"
+              className="mt-12 w-full max-w-2xl bg-black/30 backdrop-blur-sm rounded-2xl p-6 border border-white/10"
             >
-              <p className="text-sm text-white/50 mb-4 text-center">
+              <p className="text-sm text-white/70 mb-4 text-center font-medium">
                 Activity by hour
               </p>
               <HourlyHeatmap data={analytics.timeStats.hourly} delay={0.8} />
