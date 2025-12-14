@@ -71,6 +71,18 @@ export const metadata: Metadata = {
   },
   category: "technology",
   manifest: "/manifest.json",
+  icons: {
+    icon: [
+      { url: "/api/icon?size=32", sizes: "32x32", type: "image/png" },
+      { url: "/api/icon?size=48", sizes: "48x48", type: "image/png" },
+      { url: "/api/icon?size=64", sizes: "64x64", type: "image/png" },
+    ],
+    apple: {
+      url: "/api/apple-icon?size=180",
+      sizes: "180x180",
+      type: "image/png",
+    },
+  },
 };
 
 export const viewport: Viewport = {
