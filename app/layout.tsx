@@ -52,7 +52,7 @@ export const metadata: Metadata = {
       "Discover your ChatGPT usage patterns with beautiful visualizations. Like Spotify Wrapped, but for your AI conversations.",
     images: [
       {
-        url: `${siteUrl}/opengraph-image`,
+        url: `${siteUrl}/icon`,
         width: 1200,
         height: 630,
         alt: "GPT Wrapped - Your ChatGPT Year in Review",
