@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 const siteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://gpt-wrapped.vercel.app";
+  process.env.NEXT_PUBLIC_SITE_URL || "https://gpt-wrap-psi.vercel.app";
 
 export const metadata: Metadata = {
   title: {

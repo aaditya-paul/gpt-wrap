@@ -207,7 +207,7 @@ export default function WrappedPage() {
     // Handle swipe
     if (isSwipe) {
       const isLeftSwipe = distance > 0;
-      const isRightSwipe = distance < 0;
+      const isRightSwipe = distance <= 0;
 
       if (isLeftSwipe) nextSlide();
       if (isRightSwipe) prevSlide();

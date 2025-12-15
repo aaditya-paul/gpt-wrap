@@ -2,7 +2,7 @@ import { MetadataRoute } from "next";
 
 export default function robots(): MetadataRoute.Robots {
   const siteUrl =
-    process.env.NEXT_PUBLIC_SITE_URL || "https://gpt-wrapped.vercel.app";
+    process.env.NEXT_PUBLIC_SITE_URL || "https://gpt-wrap-psi.vercel.ap";
 
   return {
     rules: {
