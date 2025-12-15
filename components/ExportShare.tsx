@@ -3,7 +3,14 @@
 import React, { useRef, useState } from "react";
 import { toPng, toJpeg } from "html-to-image";
 import { motion, AnimatePresence } from "framer-motion";
-import { Download, Share2, X, Image, Loader2 } from "lucide-react";
+import {
+  Download,
+  Share2,
+  X,
+  Image,
+  Loader2,
+  MessageSquare,
+} from "lucide-react";
 import { Analytics } from "@/lib/types";
 import { format } from "date-fns";
 
@@ -150,7 +157,10 @@ export function ExportShare({ analytics, isOpen, onClose }: ExportShareProps) {
                     written
                   </p>
                   <div className="mt-4 flex items-center justify-center gap-2">
-                    <div className="w-6 h-6 rounded-lg bg-gradient-to-br from-purple-500 to-pink-500" />
+                    <div className="w-6 h-6 rounded-lg bg-gradient-to-br from-purple-500 to-pink-500 flex justify-center items-center">
+                      <MessageSquare className="w-4 h-14 text-white" />
+                    </div>
+
                     <span className="text-sm font-medium gradient-text">
                       GPT Wrapped
                     </span>

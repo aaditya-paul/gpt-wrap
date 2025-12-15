@@ -54,9 +54,19 @@ const SLIDES: Slide[] = [
     gradient: "from-blue-600 to-purple-600",
   },
   {
+    id: "first-chat",
+    title: "Where It All Began",
+    gradient: "from-teal-600 to-cyan-600",
+  },
+  {
     id: "messages",
     title: "Message Breakdown",
     gradient: "from-emerald-600 to-cyan-600",
+  },
+  {
+    id: "longest-chat",
+    title: "Marathon Conversation",
+    gradient: "from-fuchsia-600 to-pink-600",
   },
   {
     id: "activity",
@@ -67,6 +77,11 @@ const SLIDES: Slide[] = [
     id: "peak-times",
     title: "When You Chat",
     gradient: "from-amber-500 to-orange-600",
+  },
+  {
+    id: "night-owl",
+    title: "Night Owl or Early Bird?",
+    gradient: "from-indigo-700 via-purple-700 to-pink-700",
   },
   {
     id: "weekly",
@@ -92,6 +107,11 @@ const SLIDES: Slide[] = [
     id: "words",
     title: "Word Count",
     gradient: "from-green-600 to-emerald-600",
+  },
+  {
+    id: "conversation-style",
+    title: "Your Conversation Style",
+    gradient: "from-rose-600 to-orange-600",
   },
   {
     id: "summary",
@@ -256,6 +276,57 @@ export default function WrappedPage() {
           </div>
         );
 
+      case "first-chat":
+        return (
+          <div className="flex flex-col items-center justify-center h-full px-4 text-center">
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="text-xl text-white mb-6"
+            >
+              Your first conversation was on...
+            </motion.p>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.3, type: "spring" }}
+              className="mb-8"
+            >
+              <p className="text-6xl md:text-8xl font-black text-white mb-2">
+                {analytics.firstConversation
+                  ? format(analytics.firstConversation, "MMM d")
+                  : "Unknown"}
+              </p>
+              <p className="text-3xl md:text-5xl font-bold text-white/70">
+                {analytics.firstConversation
+                  ? format(analytics.firstConversation, "yyyy")
+                  : ""}
+              </p>
+            </motion.div>
+            {analytics.conversations[0] && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.6 }}
+                className="glass rounded-2xl p-6 max-w-md"
+              >
+                <p className="text-sm text-white/50 mb-2">First conversation</p>
+                <p className="text-white font-medium">
+                  {analytics.conversations[0].title}
+                </p>
+              </motion.div>
+            )}
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.8 }}
+              className="mt-8 text-white/50"
+            >
+              The beginning of your AI journey ✨
+            </motion.p>
+          </div>
+        );
+
       case "messages":
         return (
           <div className="flex flex-col items-center justify-center h-full px-4">
@@ -293,6 +364,56 @@ export default function WrappedPage() {
               {analytics.totalMessages.toLocaleString()} total messages
               exchanged
             </motion.p>
+          </div>
+        );
+
+      case "longest-chat":
+        const longestChat = analytics.conversationLengthStats.longest;
+        return (
+          <div className="flex flex-col items-center justify-center h-full px-4 text-center">
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="text-xl text-white mb-6"
+            >
+              Your longest conversation had...
+            </motion.p>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.3, type: "spring" }}
+              className="mb-6"
+            >
+              <p className="text-8xl md:text-9xl font-black text-white">
+                {longestChat?.messages.length || 0}
+              </p>
+              <p className="text-2xl text-white/70 mt-2">messages</p>
+            </motion.div>
+            {longestChat && (
+              <>
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.6 }}
+                  className="glass rounded-2xl p-6 max-w-md mb-4"
+                >
+                  <p className="text-white font-medium mb-2">
+                    {longestChat.title}
+                  </p>
+                  <p className="text-sm text-white/50">
+                    {longestChat.totalWords.toLocaleString()} words exchanged
+                  </p>
+                </motion.div>
+                <motion.p
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.8 }}
+                  className="text-white/50"
+                >
+                  That&apos;s a deep conversation! 🤯
+                </motion.p>
+              </>
+            )}
           </div>
         );
 
@@ -350,6 +471,60 @@ export default function WrappedPage() {
                 Activity by hour
               </p>
               <HourlyHeatmap data={analytics.timeStats.hourly} delay={0.8} />
+            </motion.div>
+          </div>
+        );
+
+      case "night-owl":
+        const nightActivity = analytics.timeStats.hourly
+          .slice(22, 24)
+          .concat(analytics.timeStats.hourly.slice(0, 6))
+          .reduce((a, b) => a + b, 0);
+        const dayActivity = analytics.timeStats.hourly
+          .slice(6, 22)
+          .reduce((a, b) => a + b, 0);
+        const isNightOwl = nightActivity > dayActivity;
+        const nightPercentage = Math.round(
+          (nightActivity / (nightActivity + dayActivity)) * 100
+        );
+
+        return (
+          <div className="flex flex-col items-center justify-center h-full px-4 text-center">
+            <motion.div
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.2, type: "spring" }}
+              className="text-8xl mb-6"
+            >
+              {isNightOwl ? "🦉" : "🐦"}
+            </motion.div>
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4 }}
+              className="text-5xl md:text-7xl font-black text-white mb-4"
+            >
+              {isNightOwl ? "Night Owl" : "Early Bird"}
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.6 }}
+              className="text-2xl text-white/70 mb-8"
+            >
+              Only {nightPercentage}% of your chats were at night
+            </motion.p>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.8 }}
+              className="glass rounded-2xl p-6 max-w-md"
+            >
+              <p className="text-white/80 leading-relaxed">
+                {isNightOwl
+                  ? "You love burning the midnight oil! Most of your deep conversations happen after dark. 🌙"
+                  : "You're most active during the day! Your best chats happen when the sun is up. ☀️"}
+              </p>
             </motion.div>
           </div>
         );
@@ -552,6 +727,66 @@ export default function WrappedPage() {
                 <p className="text-2xl font-bold text-white">
                   {analytics.wordStats.totalAssistantWords.toLocaleString()}{" "}
                   words
+                </p>
+              </div>
+            </motion.div>
+          </div>
+        );
+
+      case "conversation-style":
+        const avgMessageLength = Math.round(
+          analytics.wordStats.averageUserMessageLength
+        );
+        const isDetailed = avgMessageLength > 30;
+        const responseRatio =
+          analytics.totalAssistantMessages / analytics.totalUserMessages;
+
+        return (
+          <div className="flex flex-col items-center justify-center h-full px-4 text-center">
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="text-xl text-white mb-8"
+            >
+              Your conversation style is...
+            </motion.p>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.3, type: "spring" }}
+              className="mb-8"
+            >
+              <p className="text-6xl md:text-7xl font-black text-white mb-4">
+                {isDetailed ? "Detailed Explorer" : "Quick Questioner"}
+              </p>
+              <p className="text-xl text-white/70">
+                {avgMessageLength} words per message on average
+              </p>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6 }}
+              className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full max-w-2xl"
+            >
+              <div className="glass rounded-xl p-6">
+                <p className="text-4xl font-bold text-white mb-2">
+                  {isDetailed ? "📚" : "⚡"}
+                </p>
+                <p className="text-white/80">
+                  {isDetailed
+                    ? "You love to provide context and details in your questions"
+                    : "You prefer quick, to-the-point questions"}
+                </p>
+              </div>
+              <div className="glass rounded-xl p-6">
+                <p className="text-4xl font-bold text-white mb-2">
+                  {responseRatio > 1.2 ? "🔄" : "💬"}
+                </p>
+                <p className="text-white/80">
+                  {responseRatio > 1.2
+                    ? "You often have follow-up conversations"
+                    : "You get your answers efficiently"}
                 </p>
               </div>
             </motion.div>
