@@ -163,29 +163,56 @@ export default function WrappedPage() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [currentSlide]);
 
-  // Touch swipe handling
+  // Touch swipe and tap handling
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
+  const [touchStartTime, setTouchStartTime] = useState<number | null>(null);
 
   const handleTouchStart = (e: React.TouchEvent) => {
+    // Don't handle if touching an interactive element
+    if ((e.target as HTMLElement).closest('button, a, [role="button"]')) {
+      return;
+    }
     setTouchEnd(null);
     setTouchStart(e.targetTouches[0].clientX);
+    setTouchStartTime(Date.now());
   };
 
   const handleTouchMove = (e: React.TouchEvent) => {
     setTouchEnd(e.targetTouches[0].clientX);
   };
 
-  const handleTouchEnd = () => {
-    if (!touchStart || !touchEnd) return;
-    const distance = touchStart - touchEnd;
-    const isLeftSwipe = distance > 50;
-    const isRightSwipe = distance < -50;
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (!touchStart || !touchStartTime) return;
 
-    if (isLeftSwipe) nextSlide();
-    if (isRightSwipe) prevSlide();
+    const touchDuration = Date.now() - touchStartTime;
+    const distance = touchEnd ? touchStart - touchEnd : 0;
+    const isSwipe = Math.abs(distance) > 50;
+
+    // If it's a quick tap (not a swipe)
+    if (touchDuration < 300 && !isSwipe) {
+      // Get the tap position to determine left or right side
+      const tapX = e.changedTouches[0].clientX;
+      const screenWidth = window.innerWidth;
+      const isLeftSide = tapX < screenWidth / 2;
+
+      if (isLeftSide) {
+        prevSlide();
+      } else {
+        nextSlide();
+      }
+      return;
+    }
+
+    // Handle swipe
+    if (isSwipe) {
+      const isLeftSwipe = distance > 0;
+      const isRightSwipe = distance < 0;
+
+      if (isLeftSwipe) nextSlide();
+      if (isRightSwipe) prevSlide();
+    }
   };
-
   if (isLoading || !analytics) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-[#0a0a0a]">

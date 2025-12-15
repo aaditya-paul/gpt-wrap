@@ -50,6 +50,14 @@ export const metadata: Metadata = {
     title: "GPT Wrapped - Your ChatGPT Year in Review",
     description:
       "Discover your ChatGPT usage patterns with beautiful visualizations. Like Spotify Wrapped, but for your AI conversations.",
+    images: [
+      {
+        url: `${siteUrl}/opengraph-image`,
+        width: 1200,
+        height: 630,
+        alt: "GPT Wrapped - Your ChatGPT Year in Review",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
@@ -57,6 +65,7 @@ export const metadata: Metadata = {
     description:
       "Discover your ChatGPT usage patterns with beautiful visualizations. Like Spotify Wrapped, but for your AI conversations.",
     creator: "@aaditya_paul",
+    images: [`${siteUrl}/twitter-image`],
   },
   robots: {
     index: true,
